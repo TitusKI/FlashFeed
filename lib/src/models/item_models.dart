@@ -4,7 +4,7 @@ class ItemModel {
   final int id;
   final bool deleted;
   final String type;
-  final int time;
+  final int? time;
   final String text;
   final bool dead;
   final int parent;

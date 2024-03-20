@@ -44,8 +44,8 @@ class NewsDbProvider implements Source, Cache {
 
   @override
   Future<ItemModel?> fetchItems(int id) async {
-    final map =
-        await db.query('Items', columns: null, where: 'id = ?', whereArgs: [id]);
+    final map = await db
+        .query('Items', columns: null, where: 'id = ?', whereArgs: [id]);
     if (map.isNotEmpty) {
       return ItemModel.fromDb(map.first);
     }
@@ -55,9 +55,11 @@ class NewsDbProvider implements Source, Cache {
   @override
   Future<int> addItems(ItemModel item) {
     return db.insert('Items', item.toMap(),
-    conflictAlgorithm: ConflictAlgorithm.ignore
-    );
+        conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
 
+  Future<int> clear() {
+    return db.delete("Items");
   }
 }
 
